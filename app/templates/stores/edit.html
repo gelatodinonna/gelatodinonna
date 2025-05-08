@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% block content %}
+  <h2>{{ 'Επεξεργασία' if form.name.data else 'Προσθήκη' }} Καταστήματος</h2>
+  <form method="POST">
+    {{ form.hidden_tag() }}
+    {{ form.name.label }} {{ form.name(class="form-control") }}
+    {{ form.location.label }} {{ form.location(class="form-control") }}
+    {{ form.company.label }} {{ form.company(class="form-control") }}
+    {{ form.ownership_pct.label }} {{ form.ownership_pct(class="form-control") }}
+    {{ form.submit(class="btn btn-success mt-2") }}
+  </form>
+  <a href="{{ url_for('stores.store_list') }}">Πίσω</a>
+{% endblock %}

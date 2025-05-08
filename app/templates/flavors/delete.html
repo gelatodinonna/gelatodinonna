@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+{% block content %}
+  <h2>Διαγραφή Γεύσης</h2>
+  <p>Σίγουρα θέλετε να διαγράψετε τη γεύση <strong>{{ flavor.name }}</strong>;</p>
+  <form method="POST">
+    <button class="btn btn-danger">Ναι, διαγραφή</button>
+    <a href="{{ url_for('flavors.index') }}" class="btn btn-secondary">Όχι, επιστροφή</a>
+  </form>
+{% endblock %}

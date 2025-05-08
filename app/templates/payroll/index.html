@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% block content %}
+  <h2>Καταχωρήσεις Μισθοδοσίας</h2>
+  <a href="{{ url_for('payroll.new') }}" class="btn btn-primary mb-3">Νέα Μισθοδοσία</a>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Ημ/νία</th>
+        <th>Μέλος</th>
+        <th>Κατάστημα</th>
+        <th>Μικτό</th>
+        <th>Καθαρό</th>
+        <th>Μπόνους</th>
+        <th>Τρόπος Πληρωμής</th>
+        <th>Ενέργειες</th>
+      </tr>
+    </thead>
+    <tbody>
+    {% for p in payrolls %}
+      <tr>
+        <td>{{ p.date.strftime('%Y-%m-%d') }}</td>
+        <td>{{ p.personnel.first_name }} {{ p.personnel.last_name }}</td>
+        <td>{{ p.store.name }}</td>
+        <td>{{ p.gross_amount }}</td>
+        <td>{{ p.net_amount }}</td>
+        <td>{{ p.bonus or '—' }}</td>
+        <td>{{ p.payment_method }}</td>
+        <td>
+          <a href="{{ url_for('payroll.edit', id=p.id) }}" class="btn btn-sm btn-warning">Επεξεργασία</a>
+          <form method="POST" action="{{ url_for('payroll.delete', id=p.id) }}" style="display:inline" onsubmit="return confirm('Διαγραφή;');">
+            <button class="btn btn-sm btn-danger">Διαγραφή</button>
+          </form>
+        </td>
+      </tr>
+    {% else %}
+      <tr><td colspan="8" class="text-center">Δεν υπάρχουν εγγραφές.</td></tr>
+    {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}

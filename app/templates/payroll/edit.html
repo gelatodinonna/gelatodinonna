@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block content %}
+  <h2>Επεξεργασία Μισθοδοσίας</h2>
+  <form method="POST">
+    {{ form.hidden_tag() }}
+    <div class="form-group">{{ form.date.label }} {{ form.date(class="form-control, type="date"") }}</div>
+    <div class="form-group">{{ form.personnel_id.label }} {{ form.personnel_id(class="form-control") }}</div>
+    <div class="form-group">{{ form.gross_amount.label }} {{ form.gross_amount(class="form-control") }}</div>
+    <div class="form-group">{{ form.net_amount.label }} {{ form.net_amount(class="form-control") }}</div>
+    <div class="form-group">{{ form.payment_method.label }} {{ form.payment_method(class="form-control") }}</div>
+    <div class="form-group">{{ form.bonus.label }} {{ form.bonus(class="form-control") }}</div>
+    <button type="submit" class="btn btn-success mt-3">Αποθήκευση</button>
+    <a href="{{ url_for('payroll.index') }}" class="btn btn-secondary mt-3">Ακύρωση</a>
+  </form>
+{% endblock %}

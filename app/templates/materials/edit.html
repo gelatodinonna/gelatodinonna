@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h2>Επεξεργασία Υλικού</h2>
+  <form method="POST">
+    {{ form.hidden_tag() }}
+    <div class="mb-3">{{ form.code.label }} {{ form.code(class="form-control") }}</div>
+    <div class="mb-3">{{ form.name.label }} {{ form.name(class="form-control") }}</div>
+    <div class="mb-3">{{ form.quantity.label }} {{ form.quantity(class="form-control") }}</div>
+    <div class="mb-3">{{ form.unit.label }} {{ form.unit(class="form-control") }}</div>
+    <div class="mb-3">{{ form.store_id.label }} {{ form.store_id(class="form-select") }}</div>
+    <button type="submit" class="btn btn-success">{{ form.submit.label.text }}</button>
+    <a href="{{ url_for('materials.index') }}" class="btn btn-secondary ms-2">Ακύρωση</a>
+  </form>
+{% endblock %}

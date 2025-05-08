@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="el">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Gelato ERP</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm">
+  <div class="container-fluid">
+    <a class="navbar-brand d-flex align-items-center" href="{{ url_for('dashboard.dashboard') }}">
+      <img src="{{ url_for('static', filename='logo.png') }}" alt="Logo" height="30" class="me-2">
+      Gelato ERP
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav"
+            aria-controls="mainNav" aria-expanded="false" aria-label="Εμφάνιση μενού">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="mainNav">
+      <!-- αριστερό μενού -->
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item"><a class="nav-link" href="{{ url_for('dashboard.dashboard') }}">Αρχική</a></li>
+        <li class="nav-item"><a class="nav-link" href="{{ url_for('cash_register.add_cash') }}">Καταχώρηση Ταμείου</a></li>
+        <li class="nav-item"><a class="nav-link" href="{{ url_for('cash_register.view_cash') }}">Προβολή Ταμείων</a></li>
+        <li class="nav-item"><a class="nav-link" href="{{ url_for('revenues.revenue_home') }}">Έσοδα</a></li>
+        <li class="nav-item"><a class="nav-link" href="{{ url_for('expenses.expense_home') }}">Έξοδα</a></li>
+        <li class="nav-item"><a class="nav-link" href="{{ url_for('financial.financial_home') }}">Οικονομικά</a></li>
+        <li class="nav-item"><a class="nav-link" href="{{ url_for('personnel.personnel_home') }}">Προσωπικό</a></li>
+        <li class="nav-item"><a class="nav-link" href="{{ url_for('reports.period_report') }}">Αναφορές</a></li>
+        <li class="nav-item"><a class="nav-link" href="{{ url_for('stores.store_list') }}">Καταστήματα</a></li>
+        <li class="nav-item"><a class="nav-link" href="{{ url_for('payroll.index') }}">Μισθοδοσία</a></li>
+        <li class="nav-item"><a class="nav-link" href="{{ url_for('materials.index') }}">Αποθήκη Υλικών</a></li>
+        <li class="nav-item"><a class="nav-link" href="{{ url_for('flavors.index') }}">Γεύσεις</a></li>
+        <li class="nav-item"><a class="nav-link" href="{{ url_for('production.index') }}">Παραγωγή</a></li>
+        <li class="nav-item"><a class="nav-link" href="{{ url_for('auth.change_password') }}">Αλλαγή Κωδικού</a>
+        </li>
+      </ul>
+      <!-- δεξί μενού (login/logout) -->
+      <ul class="navbar-nav">
+        {% if current_user.is_authenticated %}
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('auth.logout') }}">Αποσύνδεση</a>
+          </li>
+        {% else %}
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('auth.login') }}">Σύνδεση</a>
+          </li>
+        {% endif %}
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<main class="container py-4">
+  {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+      {% for category, msg in messages %}
+        <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+          {{ msg }}
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+      {% endfor %}
+    {% endif %}
+  {% endwith %}
+  {% block content %}{% endblock %}
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% block content %}
+  <h2>Προσωπικό</h2>
+  <a href="{{ url_for('personnel.new_personnel') }}" class="btn btn-primary mb-3">Νέο Μέλος</a>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Username</th>
+        <th>Όνομα</th>
+        <th>Επίθετο</th>
+        <th>Πατρώνυμο</th>
+        <th>Ηλικία</th>
+        <th>ΑΦΜ</th>
+        <th>ΑΜΚΑ</th>
+        <th>Τηλέφωνο</th>
+        <th>Κατάστημα</th>
+        <th>Ενέργειες</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for p in staff %}
+      <tr>
+        <td>{{ p.username }}</td>
+        <td>{{ p.first_name or '—' }}</td>
+        <td>{{ p.last_name  or '—' }}</td>
+        <td>{{ p.father_name or '—' }}</td>
+        <td>{{ p.age        or '—' }}</td>
+        <td>{{ p.vat        or '—' }}</td>
+        <td>{{ p.amka       or '—' }}</td>
+        <td>{{ p.telephone  or '—' }}</td>
+        <td>{{ p.store.name if p.store else '—' }}</td>
+        <td>
+          <a href="{{ url_for('personnel.edit_personnel', id=p.id) }}" 
+             class="btn btn-sm btn-warning">Επεξεργασία</a>
+          <form method="POST"
+                action="{{ url_for('personnel.delete_personnel', id=p.id) }}"
+                style="display:inline"
+                onsubmit="return confirm('Θέλετε να διαγράψετε;');">
+            <button class="btn btn-sm btn-danger">Διαγραφή</button>
+          </form>
+        </td>
+      </tr>
+      {% else %}
+      <tr>
+        <td colspan="10" class="text-center">Δεν υπάρχουν εγγραφές.</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}

@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% block content %}
+  <h2>Νέα Καταχώρηση Μισθοδοσίας</h2>
+  <form method="POST">
+    {{ form.hidden_tag() }}
+
+    <div class="mb-3">
+      {{ form.store_id.label(class="form-label") }}
+      {{ form.store_id(class="form-select") }}
+      {% for e in form.store_id.errors %}<div class="text-danger small">{{ e }}</div>{% endfor %}
+    </div>
+    <div class="mb-3">
+      {{ form.personnel_id.label(class="form-label") }}
+      {{ form.personnel_id(class="form-select") }}
+      {% for e in form.personnel_id.errors %}<div class="text-danger small">{{ e }}</div>{% endfor %}
+    </div>
+    <div class="mb-3">
+      {{ form.date.label(class="form-label") }}
+      {{ form.date(class="form-control", type="date") }}
+      {% for e in form.date.errors %}<div class="text-danger small">{{ e }}</div>{% endfor %}
+    </div>
+    <div class="mb-3">
+      {{ form.gross_amount.label(class="form-label") }}
+      {{ form.gross_amount(class="form-control") }}
+      {% for e in form.gross_amount.errors %}<div class="text-danger small">{{ e }}</div>{% endfor %}
+    </div>
+    <div class="mb-3">
+      {{ form.net_amount.label(class="form-label") }}
+      {{ form.net_amount(class="form-control") }}
+      {% for e in form.net_amount.errors %}<div class="text-danger small">{{ e }}</div>{% endfor %}
+    </div>
+    <div class="mb-3">
+      {{ form.bonus.label(class="form-label") }}
+      {{ form.bonus(class="form-control") }}
+      {% for e in form.bonus.errors %}<div class="text-danger small">{{ e }}</div>{% endfor %}
+    </div>
+    <div class="mb-3">
+      {{ form.payment_method.label(class="form-label") }}
+      {{ form.payment_method(class="form-select") }}
+      {% for e in form.payment_method.errors %}<div class="text-danger small">{{ e }}</div>{% endfor %}
+    </div>
+
+    <button type="submit" class="btn btn-success">Αποθήκευση</button>
+    <a href="{{ url_for('payroll.index') }}" class="btn btn-secondary ms-2">Ακύρωση</a>
+  </form>
+{% endblock %}

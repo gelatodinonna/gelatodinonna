@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h2>Διαγραφή Υλικού</h2>
+  <p>Είστε σίγουροι ότι θέλετε να διαγράψετε το υλικό <strong>{{ material.name }}</strong>;</p>
+  <form method="POST">
+    <button type="submit" class="btn btn-danger">Ναι, Διαγραφή</button>
+    <a href="{{ url_for('materials.index') }}" class="btn btn-secondary ms-2">Ακύρωση</a>
+  </form>
+{% endblock %}

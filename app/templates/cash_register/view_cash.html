@@ -1,0 +1,51 @@
+<!-- app/cash_register/templates/cash_register/view_cash.html -->
+{% extends "base.html" %}
+
+{% block content %}
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <h1>Καταχωρημένα Έσοδα (Ταμείο)</h1>
+    <a href="{{ url_for('cash_register.add_cash') }}" class="btn btn-primary">Νέο Έσοδο</a>
+  </div>
+  <div class="table-responsive">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Ποσό</th>
+          <th>Ημερομηνία</th>
+          <th>Κατηγορία</th>
+          <th>Κατάστημα</th>
+          <th>Ενέργειες</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for revenue in registers %}
+          <tr>
+            <td>{{ revenue.amount }}€</td>
+            <td>{{ revenue.date.strftime('%d/%m/%Y') }}</td>
+            <td>{{ revenue.category }}</td>
+            <td>{{ revenue.store.name }}</td>
+            <td>
+              <a href="{{ url_for('cash_register.edit_cash', id=revenue.id) }}"
+                 class="btn btn-sm btn-warning me-1">
+                Επεξεργασία
+              </a>
+              <form action="{{ url_for('cash_register.delete_cash', id=revenue.id) }}"
+                    method="post" class="d-inline">
+                {{ form.hidden_tag() }}
+                <button type="submit"
+                        class="btn btn-sm btn-danger"
+                        onclick="return confirm('Είστε σίγουροι ότι θέλετε να διαγράψετε;');">
+                  Διαγραφή
+                </button>
+              </form>
+            </td>
+          </tr>
+        {% else %}
+          <tr>
+            <td colspan="5" class="text-center">Δεν υπάρχουν εγγραφές.</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+{% endblock %}

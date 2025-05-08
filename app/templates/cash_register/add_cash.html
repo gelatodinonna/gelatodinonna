@@ -1,0 +1,51 @@
+<!-- app/cash_register/templates/cash_register/add_cash.html -->
+{% extends "base.html" %}
+
+{% block content %}
+  <h1>{% if form.amount.data %}Επεξεργασία Καθημερινού Ταμείου{% else %}Καταχώρηση Καθημερινού Ταμείου{% endif %}</h1>
+  <form method="POST">
+    {{ form.hidden_tag() }}
+    
+    <!-- Ποσό -->
+    <div class="mb-3">
+      {{ form.amount.label(class="form-label") }}
+      {{ form.amount(class="form-control") }}
+      {% for error in form.amount.errors %}
+        <div class="text-danger small">{{ error }}</div>
+      {% endfor %}
+    </div>
+
+    <!-- Ημερομηνία -->
+    <div class="mb-3">
+      {{ form.date.label(class="form-label") }}
+      {{ form.date(class="form-control") }}
+      {% for error in form.date.errors %}
+        <div class="text-danger small">{{ error }}</div>
+      {% endfor %}
+    </div>
+
+    <!-- Προέλευση Χρημάτων -->
+    <div class="mb-3">
+      {{ form.payment_source.label(class="form-label") }}
+      {{ form.payment_source(class="form-select") }}
+      {% for error in form.payment_source.errors %}
+        <div class="text-danger small">{{ error }}</div>
+      {% endfor %}
+    </div>
+
+    <!-- Κατάστημα -->
+    <div class="mb-3">
+      {{ form.store_id.label(class="form-label") }}
+      {{ form.store_id(class="form-select") }}
+      {% for error in form.store_id.errors %}
+        <div class="text-danger small">{{ error }}</div>
+      {% endfor %}
+    </div>
+
+    <!-- Υποβολή -->
+    <div class="mt-4">
+      {{ form.submit(class="btn btn-primary") }}
+      <a href="{{ url_for('cash_register.view_cash') }}" class="btn btn-secondary ms-2">Ακύρωση</a>
+    </div>
+  </form>
+{% endblock %}

@@ -1,0 +1,41 @@
+# macOS
+.DS_Store
+
+# Virtualenv
+venv/
+
+# Bytecode
+__pycache__/
+*.py[cod]
+
+# Local DB
+*.db
+
+# Flask instance
+instance/# Virtual environment
+venv/
+
+# Python bytecode
+__pycache__/
+*.py[cod]
+
+# Local DB files
+*.db
+*.sqlite3
+
+# Flask instance folder
+instance/
+
+# Logs
+*.log
+# ignore macOS metadata
+.DS_Store
+app/.DS_Store
+
+# Python bytecode
+__pycache__/
+*.pyc
+
+# sqlite tmp / broken db dumps
+*.broken
+.tables

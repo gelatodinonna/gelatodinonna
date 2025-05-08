@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h2>Επιβεβαίωση Διαγραφής Εξόδου</h2>
+
+  <div class="alert alert-warning mt-4" role="alert">
+    Θέλεις σίγουρα να διαγράψεις το έξοδο των 
+    <strong>{{ expense.amount }}€</strong> από το κατάστημα 
+    <strong>{{ expense.store.name }}</strong> στις {{ expense.date.strftime('%d/%m/%Y') }};
+  </div>
+
+  <form method="POST">
+    {{ form.hidden_tag() }} {# CSRF token #}
+    <button type="submit" class="btn btn-danger">Ναι, διαγραφή</button>
+    <a href="{{ url_for('expenses.expense_home') }}" class="btn btn-secondary ml-2">Ακύρωση</a>
+  </form>
+{% endblock %}

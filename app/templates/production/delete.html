@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+{% block content %}
+  <h2>Επιβεβαίωση Διαγραφής</h2>
+  <p>Θέλετε να διαγράψετε την παραγωγή <strong>{{ prod.batch_code }}</strong> στις {{ prod.date.strftime('%d/%m/%Y %H:%M') }};</p>
+  <form method="POST">
+    <button type="submit" class="btn btn-danger">Ναι, Διαγραφή</button>
+    <a href="{{ url_for('production.index') }}" class="btn btn-secondary">Όχι, Επιστροφή</a>
+  </form>
+{% endblock %}

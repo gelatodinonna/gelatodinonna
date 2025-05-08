@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block content %}
+  <h2>Λίστα Εσόδων</h2>
+  <a href="{{ url_for('revenues.new_revenue') }}" class="btn btn-primary mb-3">Νέο Έσοδο</a>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Ημερομηνία</th><th>Κατάστημα</th><th>Κατηγορία</th><th>Ποσό (€)</th><th>Ενέργειες</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for r in revenues %}
+      <tr>
+        <td>{{ r.date.strftime('%d/%m/%Y') }}</td>
+        <td>{{ r.store.name }}</td>
+        <td>{{ r.category }}</td>
+        <td>{{ r.amount }}</td>
+        <td>
+          <a href="{{ url_for('revenues.edit_revenue', id=r.id) }}" class="btn btn-sm btn-warning">Επεξ.</a>
+          <a href="{{ url_for('revenues.delete_revenue', id=r.id) }}" class="btn btn-sm btn-danger">Διαγρ.</a>
+        </td>
+      </tr>
+      {% else %}
+      <tr><td colspan="5" class="text-center">Δεν υπάρχουν καταχωρημένα έσοδα.</td></tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}

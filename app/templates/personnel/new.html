@@ -1,0 +1,131 @@
+{% extends 'base.html' %}
+{% block content %}
+  <h2>Νέο Μέλος Προσωπικού</h2>
+  <form method="POST">
+    {{ form.hidden_tag() }}
+
+    <!-- Username -->
+    <div class="mb-3">
+      {{ form.username.label(class="form-label") }}
+      {{ form.username(class="form-control", placeholder="Username") }}
+      {% for e in form.username.errors %}
+        <div class="text-danger small">{{ e }}</div>
+      {% endfor %}
+    </div>
+
+    <!-- Password -->
+    <div class="mb-3">
+      {{ form.password.label(class="form-label") }}
+      {{ form.password(class="form-control", placeholder="Password") }}
+      {% for e in form.password.errors %}
+        <div class="text-danger small">{{ e }}</div>
+      {% endfor %}
+    </div>
+
+    <!-- Confirm Password -->
+    <div class="mb-3">
+      {{ form.confirm.label(class="form-label") }}
+      {{ form.confirm(class="form-control", placeholder="Confirm Password") }}
+      {% for e in form.confirm.errors %}
+        <div class="text-danger small">{{ e }}</div>
+      {% endfor %}
+    </div>
+
+    <!-- Όνομα, Επίθετο, Πατρώνυμο -->
+    <div class="row">
+      <div class="col-md-4 mb-3">
+        {{ form.first_name.label(class="form-label") }}
+        {{ form.first_name(class="form-control", placeholder="Όνομα") }}
+        {% for e in form.first_name.errors %}
+          <div class="text-danger small">{{ e }}</div>
+        {% endfor %}
+      </div>
+      <div class="col-md-4 mb-3">
+        {{ form.last_name.label(class="form-label") }}
+        {{ form.last_name(class="form-control", placeholder="Επίθετο") }}
+        {% for e in form.last_name.errors %}
+          <div class="text-danger small">{{ e }}</div>
+        {% endfor %}
+      </div>
+      <div class="col-md-4 mb-3">
+        {{ form.father_name.label(class="form-label") }}
+        {{ form.father_name(class="form-control", placeholder="Πατρώνυμο") }}
+        {% for e in form.father_name.errors %}
+          <div class="text-danger small">{{ e }}</div>
+        {% endfor %}
+      </div>
+    </div>
+
+    <!-- Ηλικία, ΑΦΜ, ΑΜΚΑ, Τηλέφωνο -->
+    <div class="row">
+      <div class="col-md-3 mb-3">
+        {{ form.age.label(class="form-label") }}
+        {{ form.age(class="form-control", placeholder="Ηλικία") }}
+        {% for e in form.age.errors %}
+          <div class="text-danger small">{{ e }}</div>
+        {% endfor %}
+      </div>
+      <div class="col-md-3 mb-3">
+        {{ form.vat.label(class="form-label") }}
+        {{ form.vat(class="form-control", placeholder="ΑΦΜ") }}
+        {% for e in form.vat.errors %}
+          <div class="text-danger small">{{ e }}</div>
+        {% endfor %}
+      </div>
+      <div class="col-md-3 mb-3">
+        {{ form.amka.label(class="form-label") }}
+        {{ form.amka(class="form-control", placeholder="ΑΜΚΑ") }}
+        {% for e in form.amka.errors %}
+          <div class="text-danger small">{{ e }}</div>
+        {% endfor %}
+      </div>
+      <div class="col-md-3 mb-3">
+        {{ form.telephone.label(class="form-label") }}
+        {{ form.telephone(class="form-control", placeholder="Τηλέφωνο") }}
+        {% for e in form.telephone.errors %}
+          <div class="text-danger small">{{ e }}</div>
+        {% endfor %}
+      </div>
+    </div>
+
+    <!-- Διεύθυνση -->
+    <div class="mb-3">
+      {{ form.address.label(class="form-label") }}
+      {{ form.address(class="form-control", placeholder="Διεύθυνση") }}
+      {% for e in form.address.errors %}
+        <div class="text-danger small">{{ e }}</div>
+      {% endfor %}
+    </div>
+
+    <!-- IBAN, ΑΜΑ -->
+    <div class="row">
+      <div class="col-md-6 mb-3">
+        {{ form.iban.label(class="form-label") }}
+        {{ form.iban(class="form-control", placeholder="IBAN") }}
+        {% for e in form.iban.errors %}
+          <div class="text-danger small">{{ e }}</div>
+        {% endfor %}
+      </div>
+      <div class="col-md-6 mb-3">
+        {{ form.ama.label(class="form-label") }}
+        {{ form.ama(class="form-control", placeholder="ΑΜΑ") }}
+        {% for e in form.ama.errors %}
+          <div class="text-danger small">{{ e }}</div>
+        {% endfor %}
+      </div>
+    </div>
+
+    <!-- Επιλογή Καταστημάτων (multi‐select) -->
+    <div class="mb-3">
+      {{ form.stores.label(class="form-label") }}
+      {{ form.stores(class="form-select", multiple=true) }}
+      {% for e in form.stores.errors %}
+        <div class="text-danger small">{{ e }}</div>
+      {% endfor %}
+    </div>
+
+    <!-- Κουμπιά -->
+    <button type="submit" class="btn btn-success">Αποθήκευση</button>
+    <a href="{{ url_for('personnel.personnel_home') }}" class="btn btn-secondary ms-2">Ακύρωση</a>
+  </form>
+{% endblock %}

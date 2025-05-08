@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% block content %}
+  <h2>Λίστα Γεύσεων</h2>
+  <a href="{{ url_for('flavors.new_flavor') }}" class="btn btn-primary mb-3">Νέα Γεύση</a>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Κωδικός</th>
+        <th>Όνομα</th>
+        <th>Καταστήματα</th>
+        <th>Ενέργειες</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for f in flavors %}
+      <tr>
+        <td>{{ f.code }}</td>
+        <td>{{ f.name }}</td>
+        <td>{{ f.stores|map(attribute='name')|join(', ') }}</td>
+        <td>
+          <a href="{{ url_for('flavors.edit_flavor', id=f.id) }}" class="btn btn-warning btn-sm">Επεξεργασία</a>
+          <a href="{{ url_for('flavors.delete_flavor', id=f.id) }}" class="btn btn-danger btn-sm">Διαγραφή</a>
+        </td>
+      </tr>
+      {% else %}
+      <tr>
+        <td colspan="4" class="text-center">Δεν υπάρχουν γεύσεις.</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}

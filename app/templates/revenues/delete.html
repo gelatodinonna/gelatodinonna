@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+{% block content %}
+  <h2>Επιβεβαίωση Διαγραφής Εσόδου</h2>
+  <p>Θέλεις σίγουρα να διαγράψεις το έσοδο των <strong>{{ revenue.amount }}€</strong> από <strong>{{ revenue.store.name }}</strong> την {{ revenue.date.strftime('%d/%m/%Y') }};</p>
+  <form method="POST">
+    <button type="submit" class="btn btn-danger">Ναι, διαγραφή</button>
+    <a href="{{ url_for('revenues.revenue_home') }}" class="btn btn-secondary">Ακύρωση</a>
+  </form>
+{% endblock %}

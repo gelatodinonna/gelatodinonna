@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h2>Λίστα Εξόδων</h2>
+
+  <a href="{{ url_for('expenses.new_expense') }}" class="btn btn-primary">Νέο Έξοδο</a>
+
+  <table class="table mt-4">
+    <thead>
+      <tr>
+        <th>Ημερομηνία</th>
+        <th>Ποσό (€)</th>
+        <th>Α.Φ.Μ. Προμηθευτή</th>
+        <th>Κατάστημα</th>
+        <th>Πηγή Πληρωμής</th> <!-- ΝΕΟ -->
+        <th>Ενέργειες</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for expense in expenses %}
+      <tr>
+        <td>{{ expense.date.strftime('%d/%m/%Y') }}</td>
+        <td>{{ expense.amount }}</td>
+        <td>{{ expense.supplier_vat }}</td>
+        <td>{{ expense.store.name }}</td>
+        <td>{{ expense.payment_source }}</td> <!-- ΝΕΟ -->
+        <td>
+          <a href="{{ url_for('expenses.edit_expense', id=expense.id) }}" class="btn btn-warning btn-sm">Επεξεργασία</a>
+          <a href="{{ url_for('expenses.delete_expense', id=expense.id) }}" class="btn btn-danger btn-sm">Διαγραφή</a>
+        </td>
+      </tr>
+      {% else %}
+      <tr>
+        <td colspan="6" class="text-center">Δεν υπάρχουν καταχωρημένα έξοδα.</td> <!-- 6 στήλες τώρα -->
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}

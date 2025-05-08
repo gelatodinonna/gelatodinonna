@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+{% block content %}
+  <h2>Διαγραφή Καταστήματος</h2>
+  <p>Είσαι σίγουρος/η;</p>
+  <form method="POST">
+    <button class="btn btn-danger">Ναι, διέγραψε</button>
+    <a href="{{ url_for('stores.store_list') }}" class="btn btn-secondary">Ακύρωση</a>
+  </form>
+{% endblock %}

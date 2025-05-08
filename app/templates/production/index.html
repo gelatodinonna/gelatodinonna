@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h2>Παραγωγές</h2>
+  <a href="{{ url_for('production.new_production') }}" class="btn btn-primary mb-3">
+    Νέα Παραγωγή
+  </a>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Ημ/νία & Ώρα</th>
+        <th>Κατάστημα</th>
+        <th>Γεύση</th>
+        <th>Ποσότητα</th>
+        <th>Μονάδα</th>
+        <th>Batch Code</th>
+        <th>Ενέργειες</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for p in productions %}
+      <tr>
+        <td>{{ p.date.strftime('%Y-%m-%d %H:%M') }}</td>
+        <td>{{ p.store.name }}</td>
+        <td>{{ p.flavor.name }}</td>
+        <td>{{ p.quantity }}</td>
+        <td>{{ p.unit }}</td>
+        <td>{{ p.batch_code }}</td>
+        <td>
+          <a href="{{ url_for('production.edit_production', id=p.id) }}" class="btn btn-sm btn-warning">
+            Επεξεργασία
+          </a>
+          <a href="{{ url_for('production.delete_production', id=p.id) }}" class="btn btn-sm btn-danger">
+            Διαγραφή
+          </a>
+        </td>
+      </tr>
+      {% else %}
+      <tr>
+        <td colspan="7" class="text-center">Δεν υπάρχουν εγγραφές.</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}

@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+{% block content %}
+  <h1 class="mb-4">Καλωσήρθες στο Gelato di Nonna ERP 🎉</h1>
+
+  <div class="row">
+    <div class="col-md-3">
+      <div class="card text-white bg-success mb-3">
+        <div class="card-header">Έσοδα Σήμερα</div>
+        <div class="card-body">
+          <h3 class="card-title">{{ day_rev }}€</h3>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="card text-white bg-danger mb-3">
+        <div class="card-header">Έξοδα Σήμερα</div>
+        <div class="card-body">
+          <h3 class="card-title">{{ day_exp }}€</h3>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="card text-white bg-info mb-3">
+        <div class="card-header">Έσοδα Μήνα</div>
+        <div class="card-body">
+          <h3 class="card-title">{{ month_rev }}€</h3>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="card text-white bg-warning mb-3">
+        <div class="card-header">Έξοδα Μήνα</div>
+        <div class="card-body">
+          <h3 class="card-title">{{ month_exp }}€</h3>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <hr/>
+  <h3>Γρήγορη Πλοήγηση:</h3>
+  <div class="list-group">
+    <a href="{{ url_for('revenues.revenue_home') }}" class="list-group-item list-group-item-action">
+      Δείτε τα Έσοδα
+    </a>
+    <a href="{{ url_for('expenses.expense_home') }}" class="list-group-item list-group-item-action">
+      Δείτε τα Έξοδα
+    </a>
+    <a href="{{ url_for('financial.financial_home') }}" class="list-group-item list-group-item-action">
+      Οικονομικά
+    </a>
+    <a href="{{ url_for('reports.period_report') }}" class="list-group-item list-group-item-action">
+      Αναφορές
+    </a>
+    <a href="{{ url_for('personnel.personnel_home') }}" class="list-group-item list-group-item-action">
+      Προσωπικό
+    </a>
+    <a href="{{ url_for('stores.store_list') }}" class="list-group-item list-group-item-action">
+      Καταστήματα
+    </a>
+    <a href="{{ url_for('payroll.index') }}" class="list-group-item list-group-item-action">
+      Μισθοδοσία
+    </a>
+    <a href="{{ url_for('materials.index') }}" class="list-group-item list-group-item-action">
+      Αποθήκη Υλικών
+    </a>
+    <a href="{{ url_for('flavors.index') }}" class="list-group-item list-group-item-action">
+      Γεύσεις
+    </a>
+    <a href="{{ url_for('production.index') }}" class="list-group-item list-group-item-action">
+      Παραγωγή
+    </a>
+  </div>
+{% endblock %}

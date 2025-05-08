@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% block content %}
+  <h2>Επιβεβαίωση Διαγραφής</h2>
+  <p>
+    Θέλετε σίγουρα να διαγράψετε την πληρωμή για 
+    <strong>{{ payroll.personnel.first_name }} {{ payroll.personnel.last_name }}</strong> 
+    στις {{ payroll.date.strftime('%d/%m/%Y') }};
+  </p>
+  <form method="POST">
+    <button type="submit" class="btn btn-danger">Ναι, Διαγραφή</button>
+    <a href="{{ url_for('payroll.index') }}" class="btn btn-secondary">Όχι, Επιστροφή</a>
+  </form>
+{% endblock %}

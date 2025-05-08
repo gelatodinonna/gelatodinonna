@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h2>Αποθήκη Πρώτων Υλών</h2>
+  <a href="{{ url_for('materials.new') }}" class="btn btn-primary mb-3">
+    Νέο Υλικό
+  </a>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Κωδικός</th>
+        <th>Όνομα</th>
+        <th>Ποσότητα</th>
+        <th>Μονάδα</th>
+        <th>Κατάστημα</th>
+        <th>Ενέργειες</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for m in materials %}
+      <tr>
+        <td>{{ m.code }}</td>
+        <td>{{ m.name }}</td>
+        <td>{{ m.quantity }}</td>
+        <td>{{ m.unit }}</td>
+        <td>{{ m.store.name }}</td>
+        <td>
+          <a href="{{ url_for('materials.edit', id=m.id) }}" class="btn btn-sm btn-warning">
+            Επεξεργασία
+          </a>
+          <a href="{{ url_for('materials.delete', id=m.id) }}" class="btn btn-sm btn-danger">
+            Διαγραφή
+          </a>
+        </td>
+      </tr>
+      {% else %}
+      <tr>
+        <td colspan="6" class="text-center">Δεν υπάρχουν εγγραφές.</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}

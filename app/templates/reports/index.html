@@ -1,0 +1,8 @@
+{# app/templates/reports/index.html #}
+{% extends 'base.html' %}
+{% block content %}
+  <h2>Αναφορές</h2>
+  <ul>
+    <li><a href="{{ url_for('reports.period_report') }}">Αναφορά Εσόδων & Εξόδων</a></li>
+  </ul>
+{% endblock %}

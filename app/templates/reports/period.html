@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+{% block content %}
+  <h2>Αναφορά Εσόδων &amp; Εξόδων</h2>
+
+  <form method="POST" class="form-inline mb-4">
+    {{ form.hidden_tag() }}
+    <div class="form-group mr-3">
+      {{ form.start_date.label }} {{ form.start_date(class="form-control") }}
+    </div>
+    <div class="form-group mr-3">
+      {{ form.end_date.label }}   {{ form.end_date(class="form-control") }}
+    </div>
+    <div class="form-group mr-3">
+      {{ form.store_id.label }}   {{ form.store_id(class="form-control") }}
+    </div>
+    {{ form.submit(class="btn btn-primary") }}
+  </form>
+
+  {% if report %}
+    <div id="printable">
+      <h4>Περίοδος: {{ report.start.strftime('%d/%m/%Y') }}
+        – {{ report.end.strftime('%d/%m/%Y') }}</h4>
+
+      <h5>Έσοδα</h5>
+      <table class="table table-sm">
+        <thead><tr><th>Ημ/νία</th><th>Κατηγορία</th><th>Ποσό</th></tr></thead>
+        <tbody>
+          {% for r in report.revenues %}
+            <tr>
+              <td>{{ r.date.strftime('%d/%m/%Y') }}</td>
+              <td>{{ r.category }}</td>
+              <td>{{ r.amount }}€</td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+      <p><strong>Σύνολο Εσόδων:</strong> {{ report.total_rev }}€</p>
+
+      <h5>Έξοδα</h5>
+      <table class="table table-sm">
+        <thead><tr><th>Ημ/νία</th><th>Κατηγορία</th><th>Κατάστημα</th><th>Ποσό</th></tr>
+        <tbody>
+          {% for e in report.expenses %}
+            <tr>
+              <td>{{ e.date.strftime('%d/%m/%Y') }}</td>
+              <td>{{ e.amount }}€</td>
+              <td>{{ e.store.name }}</td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+      <p><strong>Σύνολο Εξόδων:</strong> {{ report.total_exp }}€</p>
+
+      <h4>Καθαρό Ισοζύγιο: {{ report.net }}€</h4>
+
+      <button onclick="window.print()" class="btn btn-secondary mt-3">Εκτύπωση</button>
+    </div>
+  {% endif %}
+{% endblock %}

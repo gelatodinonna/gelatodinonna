@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Καταστήματα</h2>
+<a href="{{ url_for('stores.new_store') }}" class="btn btn-primary">Νέο Κατάστημα</a>
+<table class="table mt-3">
+  <thead><tr><th>Όνομα</th><th>Τοποθεσία</th><th>Εταιρεία</th><th>%</th><th></th></tr></thead>
+  <tbody>
+  {% for s in stores %}
+    <tr>
+      <td>{{ s.name }}</td>
+      <td>{{ s.location }}</td>
+      <td>{{ s.company or '-' }}</td>
+      <td>{{ s.ownership_pct }}%</td>
+      <td>
+        <a href="{{ url_for('stores.edit_store', id=s.id) }}" class="btn btn-sm btn-warning">Edit</a>
+        <a href="{{ url_for('stores.delete_store', id=s.id) }}" class="btn btn-sm btn-danger">Del</a>
+      </td>
+    </tr>
+  {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

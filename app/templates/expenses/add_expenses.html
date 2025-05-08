@@ -1,0 +1,42 @@
+<!-- templates/expenses/add_expense.html -->
+<!DOCTYPE html>
+<html lang="el">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Προσθήκη Εξόδου</title>
+</head>
+<body>
+    <h1>Προσθήκη Νέου Εξόδου</h1>
+
+    <form method="POST" action="{{ url_for('expenses.new_expense') }}">
+        {{ form.hidden_tag() }} <!-- Αντιγραφή του csrf token για προστασία από CSRF attacks -->
+        
+        <div>
+            <label for="amount">Ποσό:</label>
+            {{ form.amount() }}  <!-- Εμφάνιση του πεδίου amount -->
+        </div>
+
+        <div>
+            <label for="date">Ημερομηνία:</label>
+            {{ form.date() }}  <!-- Εμφάνιση του πεδίου date -->
+        </div>
+
+        <div>
+            <label for="supplier_vat">ΑΦΜ Προμηθευτή:</label>
+            {{ form.supplier_vat() }}  <!-- Εμφάνιση του πεδίου supplier_vat -->
+        </div>
+
+        <div>
+            <label for="store_id">Κατάστημα:</label>
+            {{ form.store_id() }}  <!-- Εμφάνιση του πεδίου store_id (dropdown για τα καταστήματα) -->
+        </div>
+
+        <div>
+            <button type="submit">Αποθήκευση</button>
+        </div>
+    </form>
+
+    <a href="{{ url_for('expenses.expense_home') }}">Επιστροφή στην αρχική σελίδα</a>
+</body>
+</html>

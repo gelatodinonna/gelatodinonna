@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h2>Επεξεργασία Εξόδου</h2>
+
+  <form method="POST" action="{{ url_for('expenses.edit_expense', id=expense.id) }}">
+    {{ form.hidden_tag() }}
+
+    <div class="form-group mt-3">
+      {{ form.amount.label(class="form-label") }}
+      {{ form.amount(class="form-control", placeholder="Ποσό (€)") }}
+    </div>
+
+    <div class="form-group mt-3">
+      {{ form.date.label(class="form-label") }}
+      {{ form.date(class="form-control") }}
+    </div>
+
+    <div class="form-group mt-3">
+      {{ form.supplier_vat.label(class="form-label") }}
+      {{ form.supplier_vat(class="form-control", placeholder="Α.Φ.Μ. Προμηθευτή") }}
+    </div>
+
+    <div class="form-group mt-3">
+      {{ form.payment_source.label(class="form-label") }}
+      {{ form.payment_source(class="form-select") }}
+    </div>
+
+    <div class="form-group mt-3">
+      {{ form.store_id.label(class="form-label") }}
+      {{ form.store_id(class="form-select") }}
+    </div>
+
+    <div class="form-group mt-4">
+      {{ form.submit(class="btn btn-success") }}
+      <a href="{{ url_for('expenses.expense_home') }}" class="btn btn-secondary ml-2">Άκυρο</a>
+    </div>
+  </form>
+{% endblock %}
